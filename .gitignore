@@ -1,3 +1,4 @@
 internal_vertex_debugger.py
-__pycache__
-.vscode
+__pycache__/*
+.vscode/*
+.venv/*
