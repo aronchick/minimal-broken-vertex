@@ -1,7 +1,8 @@
 
 Steps:
 
-Set the project: gcloud config set project same-project-vertex
+Set the project:
+gcloud config set project same-project-vertex
 export PROJECT_ID="minimal-vertex-tester"
 export SERVICE_ACCOUNT_ID="minimal-vertex-runner-sp"
 export USER_EMAIL="aronchick@busted.dev"
@@ -46,6 +47,12 @@ gcloud iam service-accounts add-iam-policy-binding \
     $SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
     --member="user:$USER_EMAIL" \
     --role="roles/iam.serviceAccountUser"
+    --project ${PROJECT_ID}
+
+gcloud iam service-accounts add-iam-policy-binding \
+    $SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
+    --member="user:$USER_EMAIL" \
+    --role="roles/iam.serviceAccountTokenCreator" \
     --project ${PROJECT_ID}
 
 - Create a cloud bucket

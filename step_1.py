@@ -10,4 +10,4 @@ def step_1_fn(
 
     a = 10
 
-    dill.dump_session("{output_context_path}")
+    dill.dump_session(output_context_path)

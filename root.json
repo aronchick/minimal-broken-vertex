@@ -49,7 +49,7 @@
               "sh",
               "-ec",
               "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
-              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef step_1_fn(\n    output_context_path: OutputPath(str),\n):\n    import dill\n\n    a = 10\n\n    dill.dump_session(\"{output_context_path}\")\n\n"
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef step_1_fn(\n    output_context_path: OutputPath(str),\n):\n    import dill\n\n    a = 10\n\n    dill.dump_session(output_context_path)\n\n"
             ],
             "image": "library/python:3.10-slim-buster"
           }
@@ -69,7 +69,7 @@
               "sh",
               "-ec",
               "program_path=$(mktemp -d)\nprintf \"%s\" \"$0\" > \"$program_path/ephemeral_component.py\"\npython3 -m kfp.v2.components.executor_main                         --component_module_path                         \"$program_path/ephemeral_component.py\"                         \"$@\"\n",
-              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef step_2_fn(\n    input_context_path: InputPath(str),\n    output_context_path: OutputPath(str),\n    metadata_url: str = \"\",\n):\n    from base64 import urlsafe_b64encode, urlsafe_b64decode\n    import dill\n    from pathlib import Path\n\n    with Path(input_context_path).open(\"rb\") as reader:\n        input_context = reader.read()\n\n    print(f\"A = {a}\")\n\n    dill.dump_session(\"{output_context_path}\")\n\n"
+              "\nimport kfp\nfrom kfp.v2 import dsl\nfrom kfp.v2.dsl import *\nfrom typing import *\n\ndef step_2_fn(\n    input_context_path: InputPath(str),\n    output_context_path: OutputPath(str),\n    metadata_url: str = \"\",\n):\n    from base64 import urlsafe_b64encode, urlsafe_b64decode\n    import dill\n    from pathlib import Path\n\n    dill.load_session(input_context_path)\n\n    print(f\"A = {a}\")\n\n    dill.dump_session(output_context_path)\n\n"
             ],
             "image": "library/python:3.10-slim-buster"
           }

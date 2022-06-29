@@ -110,16 +110,16 @@ def deploy_vertex(compiled_pipeline_path: str, project_id: str, service_account_
     BUCKET_URI = f"gs://{BUCKET_NAME}"
     PIPELINE_ROOT = f"{BUCKET_URI}/{uuid.uuid4()}/pipeline_root"
 
-    TIMESTAMP = datetime.now().strftime("%Y%m%d%H%M%S")
+    TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 
     job = aiplatform.PipelineJob(
-        display_name="MY_DISPLAY_JOB",
+        display_name="my-display-job",
         template_path=compiled_pipeline_path,
         project=project_id,
         credentials=credentials,
         location=location,
         pipeline_root=f"{PIPELINE_ROOT}",
-        job_id="MY_DISPLAY_JOB-{0}".format(TIMESTAMP),
+        job_id="my-display-job-{0}".format(TIMESTAMP),
     )
 
     # job = aiplatform.PipelineJob(
@@ -146,4 +146,3 @@ main.add_command(deploy_vertex)
 # https://click.palletsprojects.com/en/8.1.x/options/#values-from-environment-variables
 if __name__ == "__main__":
     main(auto_envvar_prefix="SAME")
-
