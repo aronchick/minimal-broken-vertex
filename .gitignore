@@ -2,3 +2,4 @@ internal_vertex_debugger.py
 __pycache__/*
 .vscode/*
 .venv/*
+minimal_vertex_sp_credentials.json
