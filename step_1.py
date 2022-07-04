@@ -7,7 +7,9 @@ def step_1_fn(
     output_context_path: OutputPath(str),
 ):
     import dill
+    from pathlib import Path
 
     a = 10
 
-    dill.dump_session(output_context_path)
+    with open(Path(output_context_path).absolute(), "wb") as writer:
+        dill.dump_session(filename=writer)

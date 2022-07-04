@@ -29,6 +29,10 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member="serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com" \
     --role=roles/ml.admin
 
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role=roles/logging.admin
+
 gcloud projects get-iam-policy $PROJECT_ID \
     --flatten="bindings[].members" \
     --format='table(bindings.role)' \

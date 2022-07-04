@@ -12,11 +12,12 @@ def step_2_fn(
     import dill
     from pathlib import Path
 
-    dill.load_session(input_context_path)
+    dill.load_session(filename=input_context_path)
 
     print(f"A = {a}")
 
-    dill.dump_session(output_context_path)
+    with open(Path(output_context_path).absolute(), "wb") as writer:
+        dill.dump_session(filename=writer)
 
 
 # import kfp
